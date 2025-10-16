@@ -1,0 +1,26 @@
+
+
+PROCEDURE dot_product(v1, v2, n, ps)
+VAR
+i : INTEGER;
+BEGIN
+ ps := 0; // being sure ps is initiated as 0;
+ FOR i FROM 0 TO n - 1 STEP 1  DO
+    ps := ps + v1[i] * v2[i];
+ END_FOR 
+END
+
+
+
+ALGORITHM DOT_PRODUCT_C
+
+VAR
+  ps : INTEGER; // variable to extend to procedure scope
+  v1 : ARRAY_OF INTEGER[n];
+  v2 : ARRAY_OF INTEGER[n];
+
+BEGIN
+   ps := 0;
+   dot_product([1,2,3],[4,6,5],3, ps) // or ps=ps
+   write ("calculated scalar of v1 and v2 is: ,"ps)
+END

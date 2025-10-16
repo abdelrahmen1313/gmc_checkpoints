@@ -1,0 +1,130 @@
+ALGORITHM FIND_DISTINCT_SUM
+VAR
+
+SET1 : ARRAY_OF INTEGER[n];
+SET2 : ARRAY_OF INTEGER[m];
+SET3 : ARRAY_OF INTEGER[q];
+CLEAN : ARRAY_OF INTEGER[s];
+// n,m,q,s are lengths of our arrays
+SUM :  INTEGER; 
+i,j : INTEGER; 
+// Current, FREQ > utility variables
+CURRENT : INTEGER;
+FREQ : INTEGER;
+
+BEGIN
+/*
+Process summary :
+ Append the two given sets, into a merged set3
+ then iterate over set3 to pop out dupplicates
+ finally, calculate the sum of set3 elements
+
+ NOTE : we chosen a safe solution by adding a CLEAN ARRAY to store distinct elements
+*/
+
+   // Step 1: Merge SET1 and SET2 into SET3[]
+   FOR i FROM 0 TO n - 1 STEP 1 DO
+    SET3[i] := SET3[i] + SET1[i]
+   END_FOR
+
+   FOR i FROM 0 TO m - 1 STEP 1  DO
+    SET3[i] := SET3[i] + SET2[i]
+   END_FOR
+
+   // Step 2: Remove duplicates manually
+   FOR i FROM 0 TO q - 1 STEP 1  DO
+    CURRENT := SET3[i] 
+    FREQ := 0;
+
+    FOR j FROM 0 TO q - 1 STEP 1  DO
+        IF (SET3[j] = CURRENT) THEN
+            FREQ := FREQ + 1;
+        END_IF
+    END_FOR
+
+    IF (FREQ = 1) THEN
+        CLEAN[CLEAN[s]] := CURRENT // append to array
+    END_IF
+
+   END_FOR  
+
+   // Step 3: Sum elements in CLEAN
+   FOR i FROM 0 TO s - 1 STEP 1  DO
+    SUM := SUM + SET3[i]
+   END_FOR
+ 
+
+  write("the distinct sum of the given two arrays is :", SUM);
+ 
+
+
+END
+
+// ************************************** SOLUTION 2 *******************************************************/
+
+/*
+WE TRY TO REDUCE MEMORY USAGE FOR THE SOLUTION 1 (heap)
+AND PROVIDE A MORE `MODULAR` APPROACH
+*/
+
+ALGORITHM FIND_DISTINCT_SUM_OVERCLOCK
+
+VAR
+SET1 : ARRAY_OF INTEGER[n];
+SET2 : ARRAY_OF INTEGER[m];
+SUM : INTEGER := 0;
+i,j,k, CURRENT, FREQ : INTEGER;
+
+BEGIN
+
+// Step 1: Check each element in SET1
+FOR i FROM 0 TO n - 1 STEP 1  DO
+    CURRENT := SET1[i];
+    FREQ := 0;
+    // FREQ in set1
+    FOR j FROM 0 TO n - 1 STEP step  DO
+        IF (SET1[i] = CURRENT) THEN
+            FREQ := FREQ + 1; 
+        END_IF
+    END_FOR
+
+    // COUNT in set2
+    FOR j FROM 0 TO m - 1 STEP 1  DO
+        IF (SET2[j] = CURRENT) THEN
+            FREQ := FREQ + 1;
+        END_IF
+    END_FOR
+
+      // If total COUNT is 1, add to SUM
+      IF (FREQ = 1) THEN
+        SUM := SUM + CURRENT
+      END_IF
+END_FOR
+
+// STEP 2 : CHECK EACH ELEMENT IN SET 2
+FOR i FROM 0 TO m - 1 STEP 1  DO
+    CURRENT := SET2[i];
+    FREQ := 0;
+    // COUNT in set2
+    FOR j FROM 0 TO m - 1 STEP step  DO
+        IF (SET2[i] = CURRENT) THEN
+            FREQ := FREQ + 1; 
+        END_IF
+    END_FOR
+
+    // COUNT in set1
+    FOR j FROM 0 TO m - 1 STEP 1  DO
+        IF (SET2[j] = CURRENT) THEN
+            FREQ := FREQ + 1;
+        END_IF
+    END_FOR
+
+      // If total COUNT is 1, add to SUM
+      IF (FREQ = 1) THEN
+        SUM := SUM + CURRENT
+      END_IF
+END_FOR
+
+  write("the distinct sum of the given two arrays is :", SUM);
+
+END
