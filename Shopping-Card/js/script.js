@@ -29,10 +29,7 @@ echo("hello gomycode");
 Core rule
 
 this script can only be used for UI/UX.
- The server must be the source of truth for prices, totals, discounts, tax, 
- shipping and inventory.
-Everything that affects money must be validated or computed server-side 
-at checkout.
+
 */
 
 
@@ -95,6 +92,7 @@ for (let card of cards) {
         card.style = ""
     })
 }
+
 
 
 
