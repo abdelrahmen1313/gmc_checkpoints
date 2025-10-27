@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Product Showcase Gallery</title>
+ 
+</head>
+<body>
+    <header>
+        <h1>Product Showcase</h1>
+        <div class="theme-toggle" id="themeToggle">
+            <div class="toggle-thumb"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="gallery" id="productGallery">
+            <!-- Products will be dynamically added here -->
+        </div>
+    </main>
+
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <img class="modal-image" id="modalImage" src="" alt="Product Image">
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <div class="product-price" id="modalPrice"></div>
+            <div class="product-actions">
+                <button class="btn btn-primary" id="modalBuyBtn">Buy Now</button>
+                <button class="btn btn-outline" id="modalCloseBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Product Showcase Gallery. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js">
+    </script>
+</body>
+</html>
